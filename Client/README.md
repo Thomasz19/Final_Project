@@ -11,9 +11,17 @@ This is a quick and rough app layout that we can expand on
     + This is used to emulate the app while you doing front end development. If you have a strong enough computer you can run the emulator on your PC. If not, then you be prompted to scan a QR code and the emulator will show up on ur phone
 
 <br>
-Everything should already by downloaded by you can also follow this link and follow the steps.
+Everything should already by downloaded but you can also follow this link and follow the steps.
 
 https://docs.expo.dev/tutorial/create-your-first-app/
+
+### Start app in android emulator
+
+1. npx expo start
+
+2. "a" for android
+
+3. Then it will load
 
 
 

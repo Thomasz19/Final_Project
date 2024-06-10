@@ -4,22 +4,21 @@ import { StyleSheet, View, Image } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './HomeScreen';
+import { UserProvider } from './UserContex';  // Import UserProvider
+import NameScreen from './screens/NameScreen';
+import GenderSelectionScreen from './screens/GenderSelectionScreen';
+import HeightScreen from './screens/HeightScreen';
+import WeightScreen from './screens/WeightScreen';
+import AgeScreen from './screens/AgeScreen';
+import HomeScreen from './screens/HomeScreen';
+import MainScreen from './screens/MainScreen'; // Import MainScreen
+import UserSelectScreen from './screens/UserSelectScreen'; // Import UserSelectScreen
+import UserEditScreen from './screens/UserEditScreen';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
 const Stack = createStackNavigator();
-
-const MainScreen = () => (
-  <View style={styles.container}>
-    <View style={styles.innerContainer}>
-      <Image source={require('./assets/Group.png')} style={styles.image} />
-      <Image source={require('./assets/FITBODY.png')} style={styles.textImage} />
-    </View>
-    <StatusBar style="auto" />
-  </View>
-);
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
@@ -51,16 +50,57 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Main" component={MainScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UserProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="UserSelect">
+          <Stack.Screen
+            name="UserSelect"
+            component={UserSelectScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Name"
+            component={NameScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Height"
+            component={HeightScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Weight"
+            component={WeightScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="GenderSelection"
+            component={GenderSelectionScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Age"
+            component={AgeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Main"
+            component={MainScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="UserEdit"
+            component={UserEditScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
 }
 
