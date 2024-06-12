@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
-import { UserContext } from '../UserContex.js';
+import { UserContext } from '../UserContext.js';
 
 const Header = ({ navigation }) => (
   <View style={styles.headerContainer}>

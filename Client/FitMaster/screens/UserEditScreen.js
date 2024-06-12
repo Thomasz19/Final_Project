@@ -9,6 +9,9 @@ const UserEditScreen = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Main')}>
         <Text style={styles.buttonText}>Go to Main</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('UserSelect')}>
+        <Text style={styles.buttonText}>Change User</Text>
+      </TouchableOpacity>
     </View>
   );
 };

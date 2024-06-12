@@ -1,6 +1,6 @@
 import React, { useState, useContext, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated, Image, Switch, ScrollView, Dimensions } from 'react-native';
-import { UserContext } from '../UserContex';
+import { UserContext } from '../UserContext';
 
 const WeightScreen = ({ navigation }) => {
   const { updateUserInfo } = useContext(UserContext);

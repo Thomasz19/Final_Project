@@ -1,6 +1,6 @@
 import React, { useState, useContext, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated, Image, ScrollView, Dimensions } from 'react-native';
-import { UserContext } from '../UserContex';
+import { UserContext } from '../UserContext';
 
 const RULER_MARK_HEIGHT = 50; // Height of each ruler mark container
 

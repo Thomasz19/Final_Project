@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import { UserContext } from '../UserContex';
+import { UserContext } from '../UserContext';
 
 const NameInputScreen = ({ navigation }) => {
   const { userInfo, updateUserInfo, submitUserInfo } = useContext(UserContext);
@@ -14,6 +14,9 @@ const NameInputScreen = ({ navigation }) => {
 
     // Update the name in userInfo
     const updatedUserInfo = { ...userInfo, name };
+
+    // Update the context with the new name
+    updateUserInfo({ name });
 
     try {
       // Log the userInfo to ensure it includes the name

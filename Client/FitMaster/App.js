@@ -1,18 +1,39 @@
+/**
+ * App.js
+ *
+ * This is the main entry point for the React Native application. It sets up the navigation stack and wraps the
+ * application in the UserProvider context to manage and share user state across the app.
+ *
+ * The App component initializes the splash screen, sets up the navigation container, and defines the navigation
+ * stack for the app, including screens for user selection, user information input, and the main screen.
+ *
+ * The UserProvider component from UserContext is used to wrap the application, ensuring that all components have
+ * access to the user state and functions for updating and submitting user information.
+ *
+ * Usage:
+ * - The app starts with the UserSelectScreen to allow users to select an existing user or add a new one.
+ * - Other screens include NameScreen, GenderSelectionScreen, HeightScreen, WeightScreen, AgeScreen, and MainScreen.
+ * - Ensure the necessary screens are imported and added to the navigation stack.
+ *
+ * Author: [Thomas Zoldowski]
+ * Date: [6/9/2024]
+ */
+
 import React, { useState, useEffect, useCallback } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Image } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { UserProvider } from './UserContex';  // Import UserProvider
+import { UserProvider } from './UserContext';  
+//Importing All the Screens
 import NameScreen from './screens/NameScreen';
 import GenderSelectionScreen from './screens/GenderSelectionScreen';
 import HeightScreen from './screens/HeightScreen';
 import WeightScreen from './screens/WeightScreen';
 import AgeScreen from './screens/AgeScreen';
 import HomeScreen from './screens/HomeScreen';
-import MainScreen from './screens/MainScreen'; // Import MainScreen
-import UserSelectScreen from './screens/UserSelectScreen'; // Import UserSelectScreen
+import MainScreen from './screens/MainScreen'; 
+import UserSelectScreen from './screens/UserSelectScreen'; 
 import UserEditScreen from './screens/UserEditScreen';
 
 // Keep the splash screen visible while we fetch resources

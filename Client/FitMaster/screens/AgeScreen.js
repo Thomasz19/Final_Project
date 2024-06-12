@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Image} from 'react-native';
 import Slider from '@react-native-community/slider';
-import { UserContext } from '../UserContex.js';
+import { UserContext } from '../UserContext.js';
 
 const AgeScreen = ({ navigation }) => {
 

@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { UserContext } from '../UserContex';
+import { UserContext } from '../UserContext';
 
 const MainScreen = ({ navigation }) => {
     const { userInfo } = useContext(UserContext);
-
+    console.log('Submitting user info:', userInfo.name);
   return (
     <View style={styles.container}>
         <Image style={styles.image1} source={{ uri: "https://via.placeholder.com/157x134" }} />

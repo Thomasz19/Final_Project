@@ -1,39 +1,42 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert } from 'react-native';
 import axios from 'axios';
-import { UserContext } from '../UserContex'; // Ensure the correct import path
-import { Ionicons } from '@expo/vector-icons'; // Assuming you are using Expo. Install with `expo install @expo/vector-icons`
+import { UserContext } from '../UserContext';
+import { useFocusEffect } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons'; 
 
-const UserSelectScreen = ({ navigation }) => {
+const UserSelectScreen = ({ navigation, route }) => {
   const { updateUserInfo } = useContext(UserContext);
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const config = {
-        method: 'post',
-        url: 'https://us-east-1.aws.data.mongodb-api.com/app/data-ahccmtz/endpoint/data/v1/action/find',
-        headers: {
-          'Content-Type': 'application/json',
-          'api-key': 'AVDiOuu2gQWJFXtVxQua89Sd9sw3U5BNsw5EWx98c1JXJzrqCElfzeo0bqaP1ZAL', // Replace with your actual API key
-        },
-        data: JSON.stringify({
-          collection: 'users',
-          database: 'FitMaster',
-          dataSource: 'FitMaster0',
-        }),
-      };
-
-      try {
-        const response = await axios(config);
-        setUsers(response.data.documents);
-      } catch (error) {
-        Alert.alert('Error', 'Failed to fetch users.');
-      }
+  const fetchUsers = async () => {
+    const config = {
+      method: 'post',
+      url: 'https://us-east-1.aws.data.mongodb-api.com/app/data-ahccmtz/endpoint/data/v1/action/find',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': 'AVDiOuu2gQWJFXtVxQua89Sd9sw3U5BNsw5EWx98c1JXJzrqCElfzeo0bqaP1ZAL',
+      },
+      data: JSON.stringify({
+        collection: 'users',
+        database: 'FitMaster',
+        dataSource: 'FitMaster0',
+      }),
     };
 
-    fetchUsers();
-  }, []);
+    try {
+      const response = await axios(config);
+      setUsers(response.data.documents);
+    } catch (error) {
+      Alert.alert('Error', 'Failed to fetch users.');
+    }
+  };
+
+  useEffect(() => {
+    if (route.params?.refresh) {
+      fetchUsers();
+    }
+  }, [route.params?.refresh]);
 
   const handleUserSelect = (user) => {
     updateUserInfo(user);
