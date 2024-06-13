@@ -2,6 +2,7 @@ const express = require("express");
 const app = express()
 const mongoose = require("mongoose");
 const UserModel = require("./models/User");
+const ExerciseModel = require("./models/Exercise");
 
 app.use(express.json());
 
@@ -11,12 +12,6 @@ mongoose.connect("mongodb+srv://beckera1:yRNp1jzNJN31x2ZB@fitmaster0.40ojfox.mon
 app.listen(3001, () => {
 console.log('Server is running on port 3001');
 });
-
-
-
-
-
-
 
 app.get("/getUser", (req, res) => {
     UserModel.find()
@@ -35,6 +30,31 @@ app.post("/createUser", async (req, res) => {
 
     res.json(user);
 });
+
+
+app.get("/getExercise", (req, res) => {
+    ExerciseModel.find()
+  .then(docs => {
+    console.log(docs);
+  })
+  .catch(err => {
+    console.error(err);
+  });
+});
+
+
+
+app.post("/createExercise", async (req, res) => {
+    const exercise = req.body;
+    const newExercise = new ExerciseModel(exercise);
+    await newExercise.save();
+
+    res.json(exercise);
+});
+
+
+
+
 
 
 //  Pass: yRNp1jzNJN31x2ZB
