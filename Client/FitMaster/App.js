@@ -1,25 +1,45 @@
+/**
+ * App.js
+ *
+ * This is the main entry point for the React Native application. It sets up the navigation stack and wraps the
+ * application in the UserProvider context to manage and share user state across the app.
+ *
+ * The App component initializes the splash screen, sets up the navigation container, and defines the navigation
+ * stack for the app, including screens for user selection, user information input, and the main screen.
+ *
+ * The UserProvider component from UserContext is used to wrap the application, ensuring that all components have
+ * access to the user state and functions for updating and submitting user information.
+ *
+ * Usage:
+ * - The app starts with the UserSelectScreen to allow users to select an existing user or add a new one.
+ * - Other screens include NameScreen, GenderSelectionScreen, HeightScreen, WeightScreen, AgeScreen, and MainScreen.
+ * - Ensure the necessary screens are imported and added to the navigation stack.
+ *
+ * Author: [Thomas Zoldowski]
+ * Date: [6/9/2024]
+ */
+
 import React, { useState, useEffect, useCallback } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Image } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './HomeScreen';
+import { UserProvider } from './UserContext';  
+//Importing All the Screens
+import NameScreen from './screens/NameScreen';
+import GenderSelectionScreen from './screens/GenderSelectionScreen';
+import HeightScreen from './screens/HeightScreen';
+import WeightScreen from './screens/WeightScreen';
+import AgeScreen from './screens/AgeScreen';
+import HomeScreen from './screens/HomeScreen';
+import MainScreen from './screens/MainScreen'; 
+import UserSelectScreen from './screens/UserSelectScreen'; 
+import UserEditScreen from './screens/UserEditScreen';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
 const Stack = createStackNavigator();
-
-const MainScreen = () => (
-  <View style={styles.container}>
-    <View style={styles.innerContainer}>
-      <Image source={require('./assets/Group.png')} style={styles.image} />
-      <Image source={require('./assets/FITBODY.png')} style={styles.textImage} />
-    </View>
-    <StatusBar style="auto" />
-  </View>
-);
 
 export default function App() {
   const [isReady, setIsReady] = useState(false);
@@ -51,16 +71,57 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Main" component={MainScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UserProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="UserSelect">
+          <Stack.Screen
+            name="UserSelect"
+            component={UserSelectScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Name"
+            component={NameScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Height"
+            component={HeightScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Weight"
+            component={WeightScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="GenderSelection"
+            component={GenderSelectionScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Age"
+            component={AgeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Main"
+            component={MainScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="UserEdit"
+            component={UserEditScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
 }
 

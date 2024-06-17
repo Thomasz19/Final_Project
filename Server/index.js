@@ -12,12 +12,6 @@ app.listen(3001, () => {
 console.log('Server is running on port 3001');
 });
 
-
-
-
-
-
-
 app.get("/getUser", (req, res) => {
     UserModel.find()
   .then(docs => {
