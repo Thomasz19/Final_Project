@@ -1,12 +1,12 @@
 import React, { useState, useCallback, useContext, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert, Image } from 'react-native';
 import axios from 'axios';
 import { UserContext } from '../UserContext';
 import { useFocusEffect } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons'; // Assuming you are using Expo. Install with `expo install @expo/vector-icons`
 
 const UserSelectScreen = ({ navigation, route }) => {
-  const { updateUserInfo } = useContext(UserContext);
+  const { updateUserInfo, deleteUser } = useContext(UserContext);
   const [users, setUsers] = useState([]);
 
   const fetchUsers = async () => {
@@ -15,7 +15,7 @@ const UserSelectScreen = ({ navigation, route }) => {
       url: 'https://us-east-1.aws.data.mongodb-api.com/app/data-ahccmtz/endpoint/data/v1/action/find',
       headers: {
         'Content-Type': 'application/json',
-        'api-key': 'AVDiOuu2gQWJFXtVxQua89Sd9sw3U5BNsw5EWx98c1JXJzrqCElfzeo0bqaP1ZAL',
+        'api-key': 'AVDiOuu2gQWJFXtVxQua89Sd9sw3U5BNsw5EWx98c1JXJzrqCElfzeo0bqaP1ZAL', // Replace with your actual API key
       },
       data: JSON.stringify({
         collection: 'users',
@@ -26,17 +26,19 @@ const UserSelectScreen = ({ navigation, route }) => {
 
     try {
       const response = await axios(config);
+      console.log('Fetched users:', response.data.documents); // Add console log here
       setUsers(response.data.documents);
     } catch (error) {
+      console.error('Error fetching users:', error); // Add console log for error
       Alert.alert('Error', 'Failed to fetch users.');
     }
   };
 
-  useEffect(() => {
-    if (route.params?.refresh) {
+  useFocusEffect(
+    useCallback(() => {
       fetchUsers();
-    }
-  }, [route.params?.refresh]);
+    }, [])
+  );
 
   const handleUserSelect = (user) => {
     updateUserInfo(user);
@@ -44,8 +46,29 @@ const UserSelectScreen = ({ navigation, route }) => {
   };
 
   const handleAddUser = () => {
-    navigation.navigate('Home'); // Adjust this to navigate to your add user screen
+    navigation.navigate('Name', { newUser: true }); // Pass parameter to indicate new user
   };
+
+  const handleDeleteUser = async (userId) => {
+    try {
+      await deleteUser(userId);
+      fetchUsers(); // Refresh the user list after deletion
+      Alert.alert('Success', 'User deleted successfully!');
+    } catch (error) {
+      Alert.alert('Error', 'Failed to delete user.');
+    }
+  };
+
+  const renderItem = ({ item }) => (
+    <View style={styles.userItemContainer}>
+      <TouchableOpacity style={styles.deleteButton} onPress={() => handleDeleteUser(item._id)}>
+        <Image source={require('../assets/trashcan.png')} style={styles.trashIcon} />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.userItem} onPress={() => handleUserSelect(item)}>
+        <Text style={styles.userName}>{item.name}</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -53,11 +76,7 @@ const UserSelectScreen = ({ navigation, route }) => {
       <FlatList
         data={users}
         keyExtractor={(item) => item._id}
-        renderItem={({ item }) => (
-          <TouchableOpacity style={styles.userItem} onPress={() => handleUserSelect(item)}>
-            <Text style={styles.userName}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
+        renderItem={renderItem}
       />
       <TouchableOpacity style={styles.addButton} onPress={handleAddUser}>
         <Ionicons name="add" size={32} color="white" />
@@ -78,10 +97,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 20,
   },
-  userItem: {
-    padding: 20,
+  userItemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+  },
+  deleteButton: {
+    padding: 10,
+  },
+  trashIcon: {
+    width: 24,
+    height: 24,
+  },
+  userItem: {
+    flex: 1,
+    padding: 20,
   },
   userName: {
     fontSize: 18,

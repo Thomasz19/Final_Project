@@ -35,18 +35,28 @@ import axios from 'axios';
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [userInfo, setUserInfo] = useState({
+  const initialUserInfo = {
     name: '',
     age: 0,
     weight: 0,
     gender: '',
     height: 0,
     isKg: true,
-  });
+  };
 
+  const [userInfo, setUserInfo] = useState(initialUserInfo);
+
+
+  // Function to update user information in the context
   const updateUserInfo = (newInfo) => {
     setUserInfo((prevInfo) => ({ ...prevInfo, ...newInfo }));
   };
+
+  // Function to reset user information to initial state
+  const resetUserInfo = () => {
+    setUserInfo(initialUserInfo);
+  };
+
 
   const submitUserInfo = async (user) => {
     const data = JSON.stringify({
@@ -54,12 +64,12 @@ export const UserProvider = ({ children }) => {
       database: "FitMaster", 
       dataSource: "FitMaster0", 
       document: {
-        name: userInfo.name,
-        age: userInfo.age,
-        weight: userInfo.weight,
-        gender: userInfo.gender,
-        height: userInfo.height,
-        isKg: userInfo.isKg,
+        name: user.name,
+        age: user.age,
+        weight: user.weight,
+        gender: user.gender,
+        height: user.height,
+        isKg: user.isKg,
       }, 
     });
 
@@ -76,14 +86,40 @@ export const UserProvider = ({ children }) => {
 
     try {
       const response = await axios(config);
-      console.log('User information submitted successfully:', response.data);
+      console.log('(UserContext_Line79)User information submitted successfully:', response.data);
     } catch (error) {
       throw new Error(`Failed to submit user information: ${error.message}`);
     }
   };
 
+  // Function to delete a user from MongoDB
+  const deleteUser = async (userId) => {
+    const config = {
+      method: 'post',
+      url: 'https://us-east-1.aws.data.mongodb-api.com/app/data-ahccmtz/endpoint/data/v1/action/deleteOne',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': 'AVDiOuu2gQWJFXtVxQua89Sd9sw3U5BNsw5EWx98c1JXJzrqCElfzeo0bqaP1ZAL', // Replace with your actual API key
+      },
+      data: JSON.stringify({
+        collection: 'users',
+        database: 'FitMaster',
+        dataSource: 'FitMaster0',
+        filter: { _id: { $oid: userId } },
+      }),
+    };
+
+    try {
+      await axios(config);
+      return true; // Indicate success
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      throw new Error('Failed to delete user.');
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ userInfo, updateUserInfo, submitUserInfo }}>
+    <UserContext.Provider value={{ userInfo, updateUserInfo, resetUserInfo, submitUserInfo, deleteUser  }}>
       {children}
     </UserContext.Provider>
   );

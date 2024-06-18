@@ -1,10 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { UserContext } from '../UserContext';
 
-const NameInputScreen = ({ navigation }) => {
-  const { userInfo, updateUserInfo, submitUserInfo } = useContext(UserContext);
+const NameInputScreen = ({ navigation, route }) => {
+  const { userInfo, updateUserInfo, resetUserInfo, submitUserInfo } = useContext(UserContext);
   const [name, setName] = useState('');
+
+  useEffect(() => {
+    if (route.params?.newUser) {
+      resetUserInfo(); // Reset user info if creating a new user
+    }
+  }, [route.params?.newUser]);
 
   const handleSave = async () => {
     if (!name.trim()) {
@@ -12,19 +18,20 @@ const NameInputScreen = ({ navigation }) => {
       return;
     }
 
-    // Update the name in userInfo
-    const updatedUserInfo = { ...userInfo, name };
-
     // Update the context with the new name
     updateUserInfo({ name });
 
     try {
-      // Log the userInfo to ensure it includes the name
-      console.log('Submitting user info:', { ...userInfo, name });
+      // Use the latest userInfo including the new name
+      const updatedUserInfo = { ...userInfo, name };
 
+      console.log('NS28_Submitting user info:', updatedUserInfo); // Log the info to be submitted
+
+      // Submit the updated user information
       await submitUserInfo(updatedUserInfo);
+
       Alert.alert('Success', 'User information saved successfully!');
-      navigation.navigate('Main'); // Navigate to MainScreen after saving
+      navigation.navigate('UserSelect', { refresh: true }); // Navigate to UserSelectScreen after saving
     } catch (error) {
       Alert.alert('Error', `There was a problem saving the user information: ${error.message}`);
     }
