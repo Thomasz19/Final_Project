@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require("mongoose");
 const UserModel = require("./models/User");
 const ExerciseModel = require("./models/Exercise");
+const LogModel = require("./models/Log"); // Add the LogModel
 
 app.use(express.json());
 
@@ -53,6 +54,37 @@ app.post("/createExercise", async (req, res) => {
 });
 
 
+// Log an exercise
+app.post("/logExercise", async (req, res) => {
+  try {
+    const { userId, workout, exercise, weight, reps } = req.body;
+    const log = new LogModel({
+      userId,
+      workout,
+      exercise,
+      weight,
+      reps,
+      timestamp: new Date()
+    });
+    await log.save();
+    res.status(201).json({ message: "Exercise logged successfully." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to log exercise" });
+  }
+});
+
+// Get logs for a user
+app.get("/getLogs/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const logs = await LogModel.find({ userId });
+    res.json(logs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch logs" });
+  }
+});
 
 
 

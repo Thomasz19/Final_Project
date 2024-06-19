@@ -35,6 +35,9 @@ import HomeScreen from './screens/HomeScreen';
 import MainScreen from './screens/MainScreen'; 
 import UserSelectScreen from './screens/UserSelectScreen'; 
 import UserEditScreen from './screens/UserEditScreen';
+import WorkoutScreen from './screens/WorkoutScreen';
+import ExerciseSelectionScreen from './screens/ExerciseSelectionScreen';
+import ExerciseDetailScreen from './screens/ExerciseDetailScreen';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -117,6 +120,21 @@ export default function App() {
           <Stack.Screen
             name="UserEdit"
             component={UserEditScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Workout"
+            component={WorkoutScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Exercise"
+            component={ExerciseSelectionScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ExerciseDetail"
+            component={ExerciseDetailScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
