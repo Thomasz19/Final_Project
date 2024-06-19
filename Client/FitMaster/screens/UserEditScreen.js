@@ -69,10 +69,7 @@ const EditUserScreen = ({ navigation }) => {
           <View style={styles.profilePictureContainer}>
             <Image source={{ uri: 'https://via.placeholder.com/294x168' }} style={styles.profilePicture} />
           </View>
-          <View style={styles.iconContainer}>
-            <View style={styles.iconBackground} />
-            <View style={styles.iconContent}></View>
-          </View>
+          
           <View style={styles.profileDetailsContainer}>
             <View style={styles.profileDetail}>
               <Text style={styles.profileDetailValue}>{weight} kg</Text>

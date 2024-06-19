@@ -1,12 +1,12 @@
-import React, { useState, useCallback, useContext, useEffect } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert, Image } from 'react-native';
 import axios from 'axios';
 import { UserContext } from '../UserContext';
 import { useFocusEffect } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons'; // Assuming you are using Expo. Install with `expo install @expo/vector-icons`
+import { Ionicons } from '@expo/vector-icons'; 
 
 const UserSelectScreen = ({ navigation, route }) => {
-  const { updateUserInfo, deleteUser } = useContext(UserContext);
+  const { updateUserInfo, deleteUser, resetUserInfo } = useContext(UserContext);
   const [users, setUsers] = useState([]);
 
   const fetchUsers = async () => {
@@ -46,7 +46,8 @@ const UserSelectScreen = ({ navigation, route }) => {
   };
 
   const handleAddUser = () => {
-    navigation.navigate('Name', { newUser: true }); // Pass parameter to indicate new user
+    resetUserInfo();
+    navigation.navigate('Home', { newUser: true }); // Pass parameter to indicate new user
   };
 
   const handleDeleteUser = async (userId) => {
@@ -55,6 +56,7 @@ const UserSelectScreen = ({ navigation, route }) => {
       fetchUsers(); // Refresh the user list after deletion
       Alert.alert('Success', 'User deleted successfully!');
     } catch (error) {
+      console.error('Error fetching users:', error); // Add console log for error
       Alert.alert('Error', 'Failed to delete user.');
     }
   };
@@ -79,7 +81,7 @@ const UserSelectScreen = ({ navigation, route }) => {
         renderItem={renderItem}
       />
       <TouchableOpacity style={styles.addButton} onPress={handleAddUser}>
-        <Ionicons name="add" size={32} color="white" />
+      <Image source={require('../assets/add.png')} style={styles.trashIcon} />
       </TouchableOpacity>
     </View>
   );
