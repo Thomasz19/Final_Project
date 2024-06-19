@@ -55,8 +55,9 @@ const MainScreen = ({ navigation }) => {
         </View>
         <View style={styles.menuDivider}></View>
         <View style={styles.menuItem}>
-          <View style={styles.menuIcon2}></View>
-          <Text style={styles.menuText2}>Progress{'\n'}tracking</Text>
+        <TouchableOpacity style={styles.menuIcon} onPress={() => navigation.navigate('Log')}>
+            <Image source={require('../assets/LogIcon.png')} style={styles.menuIcon} />
+          </TouchableOpacity>
         </View>
         <View style={styles.menuDivider}></View>
         <View style={styles.menuItem}>

@@ -86,6 +86,26 @@ app.get("/getLogs/:userId", async (req, res) => {
   }
 });
 
+// Get logs grouped by day for a user
+app.get("/getLogsGroupedByDay/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const logs = await LogModel.find({ userId });
+
+    // Group logs by day
+    const groupedLogs = logs.reduce((acc, log) => {
+      const date = new Date(log.timestamp).toISOString().split('T')[0];
+      if (!acc[date]) acc[date] = [];
+      acc[date].push(log);
+      return acc;
+    }, {});
+
+    res.json(groupedLogs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch logs" });
+  }
+});
 
 
 
