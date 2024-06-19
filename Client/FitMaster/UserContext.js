@@ -46,7 +46,6 @@ export const UserProvider = ({ children }) => {
 
   const [userInfo, setUserInfo] = useState(initialUserInfo);
 
-
   // Function to update user information in the context
   const updateUserInfo = (newInfo) => {
     setUserInfo((prevInfo) => ({ ...prevInfo, ...newInfo }));
@@ -57,25 +56,32 @@ export const UserProvider = ({ children }) => {
     setUserInfo(initialUserInfo);
   };
 
-
+  // Function to submit user information to MongoDB
   const submitUserInfo = async (user) => {
-    const data = JSON.stringify({
-      collection: "users",
-      database: "FitMaster", 
-      dataSource: "FitMaster0", 
-      document: {
-        name: user.name,
-        age: user.age,
-        weight: user.weight,
-        gender: user.gender,
-        height: user.height,
-        isKg: user.isKg,
-      }, 
-    });
+    const { _id, ...userData } = user; // Extract the user ID and the rest of the user data
+
+    const url = _id
+      ? 'https://us-east-1.aws.data.mongodb-api.com/app/data-ahccmtz/endpoint/data/v1/action/updateOne'
+      : 'https://us-east-1.aws.data.mongodb-api.com/app/data-ahccmtz/endpoint/data/v1/action/insertOne';
+
+    const data = _id
+      ? JSON.stringify({
+          collection: 'users',
+          database: 'FitMaster',
+          dataSource: 'FitMaster0',
+          filter: { _id: { $oid: _id } },
+          update: { $set: userData },
+        })
+      : JSON.stringify({
+          collection: 'users',
+          database: 'FitMaster',
+          dataSource: 'FitMaster0',
+          document: userData,
+        });
 
     const config = {
       method: 'post',
-      url: 'https://us-east-1.aws.data.mongodb-api.com/app/data-ahccmtz/endpoint/data/v1/action/insertOne', //API Endpoint link
+      url: url,
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Request-Headers': '*',
@@ -86,6 +92,9 @@ export const UserProvider = ({ children }) => {
 
     try {
       const response = await axios(config);
+      if (!_id) {
+        setUserInfo({ ...user, _id: response.data.insertedId }); // Update userInfo with the new ID if a new user was created
+      }
       console.log('(UserContext_Line79)User information submitted successfully:', response.data);
     } catch (error) {
       throw new Error(`Failed to submit user information: ${error.message}`);
@@ -119,7 +128,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ userInfo, updateUserInfo, resetUserInfo, submitUserInfo, deleteUser  }}>
+    <UserContext.Provider value={{ userInfo, updateUserInfo, resetUserInfo, submitUserInfo, deleteUser }}>
       {children}
     </UserContext.Provider>
   );
