@@ -15,16 +15,6 @@
  * - The UserProvider should wrap the top-level component in the application to ensure all components have access
  *   to the context.
  *
- * Example:
- * import { useContext } from 'react';
- * import { UserContext } from '../UserContext';
- *
- * const MyComponent = () => {
- *   const { userInfo, updateUserInfo, submitUserInfo } = useContext(UserContext);
- *
- *   // Use the context values in your component
- * };
- *
  * Author: [Thomas Zoldowski]
  * Date: [6/9/20224]
  */

@@ -400,7 +400,6 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     padding: 9,
-    //backgroundColor: 'rgba(226, 241, 99, 0)',
     borderRadius: 20,
     overflow: 'hidden',
     flexDirection: 'column',

@@ -4,8 +4,8 @@
  * This screen component allows users to select a workout from a list of predefined workouts.
  * Upon selecting a workout, the user navigates to the Exercise screen where exercises related to the selected workout are displayed.
  *
- * Author: [Your Name]
- * Date: [Date]
+ * Author: [Thomas Zoldowski]
+ * Date: [6/20/24]
  */
 
 import React from 'react';
