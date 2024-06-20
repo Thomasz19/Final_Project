@@ -1,3 +1,13 @@
+/**
+ * EditUserScreen.js
+ *
+ * This screen component allows users to edit their profile information including name, weight, height, and date of birth.
+ * The user information is managed using the UserContext.
+ *
+ * Author: [Thomas Zoldowski]
+ * Date: [6/9/2024]
+ */
+
 import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, ScrollView, Dimensions, Alert } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker'; // Assuming you are using Expo. Install with `expo install @react-native-community/datetimepicker`
@@ -13,6 +23,7 @@ const EditUserScreen = ({ navigation }) => {
   const [age, setAge] = useState(userInfo.age);
   const [showDatePicker, setShowDatePicker] = useState(false);
 
+  // Function to calculate age from date of birth
   const calculateAge = (date) => {
     const today = new Date();
     const birthDate = new Date(date);
@@ -24,6 +35,7 @@ const EditUserScreen = ({ navigation }) => {
     return age;
   };
 
+  // Handle date change from the date picker
   const handleDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || dob;
     setShowDatePicker(false);
@@ -32,6 +44,7 @@ const EditUserScreen = ({ navigation }) => {
     setAge(calculatedAge);
   };
 
+  // Handle saving the updated user information
   const handleSave = async () => {
     const parsedWeight = parseFloat(weight);
     const parsedHeight = parseFloat(height);

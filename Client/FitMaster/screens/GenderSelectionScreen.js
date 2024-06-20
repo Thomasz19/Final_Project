@@ -1,7 +1,19 @@
+/**
+ * GenderSelectionScreen.js
+ *
+ * This screen component allows the user to select their gender. The selected gender
+ * is stored in the context and the user can proceed to the next screen to continue the setup process.
+ * If no gender is selected, an alert will prompt the user to make a selection.
+ *
+ * Author: [Thomas Zoldowski]
+ * Date: [6/9/2024]
+ */
+
 import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import { UserContext } from '../UserContext.js';
 
+// Header component for the screen, including a back button
 const Header = ({ navigation }) => (
   <View style={styles.headerContainer}>
     <TouchableOpacity style={styles.backContainer} onPress={() => navigation.goBack()}>
@@ -11,12 +23,14 @@ const Header = ({ navigation }) => (
   </View>
 );
 
+// Heading component to display text headers
 const Heading = ({ text }) => (
   <View style={styles.headingContainer}>
     <Text style={styles.headingText}>{text}</Text>
   </View>
 );
 
+// GenderCard component to display gender options
 const GenderCard = ({ imageSrc, gender, onPress, isSelected }) => (
   <TouchableOpacity
     style={[styles.genderCardContainer, isSelected && styles.selectedGenderCard]}
@@ -27,6 +41,7 @@ const GenderCard = ({ imageSrc, gender, onPress, isSelected }) => (
   </TouchableOpacity>
 );
 
+// Description component for additional text description
 const Description = () => (
   <View style={styles.descriptionContainer}>
     <Text style={styles.descriptionText}>
@@ -35,21 +50,24 @@ const Description = () => (
   </View>
 );
 
+// Main component for gender selection screen
 const GenderSelectionScreen = ({ navigation }) => {
-  const { updateUserInfo } = useContext(UserContext);
-  const [selectedGender, setSelectedGender] = useState(null);
+  const { updateUserInfo } = useContext(UserContext); // Use context to update user information
+  const [selectedGender, setSelectedGender] = useState(null); // State to track selected gender
 
+  // Handle gender selection
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
     updateUserInfo({ gender });
   };
 
+  // Handle continue button press
   const handleContinue = () => {
     if (!selectedGender) {
       Alert.alert('Error', 'Please select a gender.');
       return;
     }
-    navigation.navigate('Age'); // Replace with the actual next screen
+    navigation.navigate('Age'); // Navigate to the next screen
   };
 
   return (

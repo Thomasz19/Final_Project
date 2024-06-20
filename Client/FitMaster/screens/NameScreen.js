@@ -1,3 +1,13 @@
+/**
+ * NameInputScreen.js
+ *
+ * This screen component allows users to input their name and review other user information such as age, weight, gender, and height.
+ * The user information is managed using the UserContext.
+ *
+ * Author: [Thomas Zoldowski]
+ * Date: [6/9/2024]
+ */
+
 import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { UserContext } from '../UserContext';
@@ -6,12 +16,14 @@ const NameInputScreen = ({ navigation, route }) => {
   const { userInfo, updateUserInfo, resetUserInfo, submitUserInfo } = useContext(UserContext);
   const [name, setName] = useState('');
 
+  // Reset user info if creating a new user
   useEffect(() => {
     if (route.params?.newUser) {
-      resetUserInfo(); // Reset user info if creating a new user
+      resetUserInfo();
     }
   }, [route.params?.newUser]);
 
+  // Handle saving the user information
   const handleSave = async () => {
     if (!name.trim()) {
       Alert.alert('Error', 'Please enter your name.');

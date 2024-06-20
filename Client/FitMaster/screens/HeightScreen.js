@@ -1,32 +1,45 @@
+/**
+ * HeightScreen.js
+ *
+ * This screen component allows the user to select their height using a custom scrollable ruler.
+ * The selected height is stored in the context and the user can proceed to the next screen to continue the setup process.
+ * If no height is selected, an alert will prompt the user to make a selection.
+ *
+ * Author: [Thomas Zoldowski]
+ * Date: [6/9/2024]
+ */
+
 import React, { useState, useContext, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated, Image, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated, Image, Dimensions } from 'react-native';
 import { UserContext } from '../UserContext';
 
 const RULER_MARK_HEIGHT = 50; // Height of each ruler mark container
 
 const HeightScreen = ({ navigation }) => {
-  const { updateUserInfo } = useContext(UserContext);
+  const { updateUserInfo } = useContext(UserContext); // Use context to update user information
   const [selectedHeight, setSelectedHeight] = useState(170); // Default height set to 170 cm
-  const scrollY = useRef(new Animated.Value(0)).current;
+  const scrollY = useRef(new Animated.Value(0)).current; // Animated value for scroll position
   const { height } = Dimensions.get('window');
-  
+
+  // Back button component
   const BackButton = ({ navigation }) => (
     <TouchableOpacity style={styles.Backcontainer} onPress={() => navigation.goBack()}>
-        <Image source={require('../assets/Arrow.png')} style={styles.BackArrow} />
-        <Text style={styles.BackText}>Back</Text>
+      <Image source={require('../assets/Arrow.png')} style={styles.BackArrow} />
+      <Text style={styles.BackText}>Back</Text>
     </TouchableOpacity>
+  );
 
-);
-
+  // Handle continue button press
   const handleContinue = () => {
     if (!selectedHeight) {
       Alert.alert('Error', 'Please select a height.');
       return;
     }
     updateUserInfo({ height: selectedHeight });
-    navigation.navigate('Name'); // Replace with the actual next screen
+    navigation.navigate('Name'); // Navigate to the next screen
   };
 
+  // Handle scroll event to update selected height
   const onScroll = Animated.event(
     [{ nativeEvent: { contentOffset: { y: scrollY } } }],
     {
@@ -41,7 +54,7 @@ const HeightScreen = ({ navigation }) => {
 
   return (
     <View style={styles.MainContainer}>
-        <BackButton navigation={navigation} />
+      <BackButton navigation={navigation} />
       <Text style={styles.TitleText}>What is Your Height?</Text>
       <Text style={styles.SelectedHeightText}>{selectedHeight} cm</Text>
       <View style={styles.sliderContainer}>
@@ -54,7 +67,7 @@ const HeightScreen = ({ navigation }) => {
           scrollEventThrottle={16}
           onScroll={onScroll}
           contentContainerStyle={styles.scrollViewContent}
-          snapToInterval={50}
+          snapToInterval={RULER_MARK_HEIGHT}
           decelerationRate="fast"
         >
           {[...Array(201)].map((_, i) => {
@@ -134,7 +147,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '50%',
     left: 125,
-    transform: [{ translateY: -18 }, {rotate: "-90deg"}, {scale: 1.2}],
+    transform: [{ translateY: -18 }, { rotate: "-90deg" }, { scale: 1.2 }],
     zIndex: 1,
   },
   arrow: {
@@ -170,16 +183,16 @@ const styles = StyleSheet.create({
     color: '#E2F163',
     textAlign: 'center',
     flexDirection: 'row',
-    },
-    BackArrow:{
-        marginRight: 6,
-    },
-    BackText: {
-        color: '#E2F163',
-        fontSize: 15,
-        fontWeight: '600',
-        textTransform: 'capitalize',
-    },
+  },
+  BackArrow: {
+    marginRight: 6,
+  },
+  BackText: {
+    color: '#E2F163',
+    fontSize: 15,
+    fontWeight: '600',
+    textTransform: 'capitalize',
+  },
 });
 
 export default HeightScreen;

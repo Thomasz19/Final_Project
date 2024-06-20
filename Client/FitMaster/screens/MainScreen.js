@@ -1,3 +1,13 @@
+/**
+ * MainScreen.js
+ *
+ * This screen component displays the main interface for the fitness app, including greetings, exercise recommendations, and navigation options.
+ * The user information is retrieved from the UserContext.
+ *
+ * Author: [Thomas Zoldowski]
+ * Date: [6/9/2024]
+ */
+
 import React, { useContext } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { UserContext } from '../UserContext';
@@ -55,7 +65,7 @@ const MainScreen = ({ navigation }) => {
         </View>
         <View style={styles.menuDivider}></View>
         <View style={styles.menuItem}>
-        <TouchableOpacity style={styles.menuIcon} onPress={() => navigation.navigate('Log')}>
+          <TouchableOpacity style={styles.menuIcon} onPress={() => navigation.navigate('Log')}>
             <Image source={require('../assets/LogIcon.png')} style={styles.menuIcon} />
           </TouchableOpacity>
         </View>

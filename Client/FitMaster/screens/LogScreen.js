@@ -1,3 +1,14 @@
+/**
+ * LogScreen.js
+ *
+ * This screen component displays the exercise logs for the current user.
+ * The logs are grouped by date, and users can expand each date to view the details of their workouts.
+ * Data is fetched from the MongoDB database using Axios, and the user information is retrieved from the UserContext.
+ *
+ * Author: [Thomas Zoldowski]
+ * Date: [6/9/2024]
+ */
+
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import axios from 'axios';
@@ -8,6 +19,7 @@ const LogScreen = () => {
   const [logs, setLogs] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
 
+  // Fetch logs when the component mounts and whenever userInfo._id changes
   useEffect(() => {
     const fetchLogs = async () => {
       try {
@@ -28,7 +40,7 @@ const LogScreen = () => {
         const response = await axios(config);
         const logs = response.data.documents;
 
-        // Group logs by day
+        // Group logs by date
         const groupedLogs = logs.reduce((acc, log) => {
           const date = new Date(log.timestamp).toISOString().split('T')[0];
           if (!acc[date]) acc[date] = [];
@@ -45,6 +57,7 @@ const LogScreen = () => {
     fetchLogs();
   }, [userInfo._id]);
 
+  // Handle date selection to expand/collapse logs for the selected date
   const handleDateSelect = (date) => {
     setSelectedDate(selectedDate === date ? null : date);
   };

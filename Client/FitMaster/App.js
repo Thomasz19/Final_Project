@@ -148,39 +148,3 @@ export default function App() {
     </UserProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  innerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 40,
-    paddingVertical: 50,
-    width: '100%',
-    maxWidth: 480,
-    borderRadius: 24,
-    borderColor: '#fff',
-    borderWidth: 1,
-    backgroundColor: '#232323',
-  },
-  image: {
-    width: 136,
-    height: 63,
-    aspectRatio: undefined,
-    alignSelf: 'center',
-    marginTop: 10,
-  },
-  textImage: {
-    width: 170,
-    height: 30,
-    aspectRatio: undefined, // Adjust aspect ratio based on the actual dimensions of the image
-    alignSelf: 'center',
-    marginTop: 10,
-  },
-});
