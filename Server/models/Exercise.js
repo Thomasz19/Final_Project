@@ -1,3 +1,4 @@
+//This file in not used but could be used to extend the app further
 const mongoose = require('mongoose')
 const ExerciseSchema = new mongoose.Schema({
     name: {

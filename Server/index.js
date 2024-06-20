@@ -1,11 +1,11 @@
 /**
- * server.js
+ * index.js
  *
  * This is the main server file for the FitMaster application. It connects to the MongoDB database,
  * sets up the necessary routes for handling user, exercise, and log data, and starts the server.
  *
- * Author: [Your Name]
- * Date: [Date]
+ * Author: [Andrew Becker]
+ * Date: [6/20/2024]
  */
 
 const express = require("express");
