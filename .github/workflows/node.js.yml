@@ -29,6 +29,20 @@ jobs:
         cache-dependency-path: |
           ./Server/package-lock.json
           ./Client/FitMaster/package-lock.json
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    # Install and test server dependencies
+    - name: Install server dependencies
+      run: npm ci
+      working-directory: ./Server
+
+    - name: Run server tests
+      run: npm test
+      working-directory: ./Server
+
+    # Install and test client dependencies
+    - name: Install client dependencies
+      run: npm ci
+      working-directory: ./Client/FitMaster
+
+    - name: Run client tests
+      run: npm test
+      working-directory: ./Client/FitMaster
