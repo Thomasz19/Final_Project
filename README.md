@@ -202,4 +202,4 @@ Another enhancement we plan to introduce is the ability to favorite workouts. Us
 Overall, our fitness app provides the essential tools for anyone wanting to get in shape and track their progress. By letting users log their workouts, exercises, and personal fitness goals, we aim to make staying fit easier and more fun. We hope to keep improving this project with new features and better user experiences, making it even more useful for everyone on their fitness journey. We believe this app can become a great companion for anyone looking to improve their fitness.
 
 ## 8 Walkthrough
-stuff
+[Demo_Video](https://drive.google.com/file/d/174nRUIdOLoOMt0UHJXD45JebyEnWLRJn/view?usp=sharing)
