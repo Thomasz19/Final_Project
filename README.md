@@ -36,7 +36,7 @@ We used Jira to manage tasks and track progress throughout the project. Jira hel
 
 ### 3.2 Use Case Diagram
 
-In a use case diagram for a fitness app that logs workouts, the primary actor is the User who interacts with functionalities like logging workouts, viewing workout history, setting goals, tracking progress, and receiving reminders and notifications. The User initiates actions such as entering workout details, setting fitness goals, and monitoring progress through the app. Administrators, if present, manage user accounts and overall app functionality. This diagram outlines the essential interactions and functionalities between users and the fitness app system.
+In a use case diagram for a fitness app that logs workouts, the primary actor is the User who interacts with functionalities like logging workouts, viewing workout history, setting goals, tracking progress, and receiving reminders and notifications. The User initiates actions such as entering workout details, setting fitness goals, and monitoring progress through the app. This diagram outlines the essential interactions and functionalities between users and the fitness app system.
 
 <p align="center">
   <img src="Images/use_case.png" width="500" title="use case diagram">
