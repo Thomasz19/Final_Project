@@ -13,7 +13,6 @@ import { View, Text, TouchableOpacity, StyleSheet, FlatList, Alert, Image } from
 import axios from 'axios';
 import { UserContext } from '../UserContext';
 import { useFocusEffect } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
 
 const UserSelectScreen = ({ navigation, route }) => {
   const { updateUserInfo, deleteUser, resetUserInfo } = useContext(UserContext);

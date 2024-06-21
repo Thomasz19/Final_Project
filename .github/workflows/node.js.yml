@@ -33,7 +33,9 @@ jobs:
     - name: Install server dependencies
       run: npm ci
       working-directory: ./Server
-
+      
+    - run: npm run build --if-present
+      working-directory: ./Client/FitMaster
     # Install and test client dependencies
     - name: Install client dependencies
       run: npm ci
