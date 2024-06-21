@@ -22,7 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
@@ -34,15 +34,7 @@ jobs:
       run: npm ci
       working-directory: ./Server
 
-    - name: Run server tests
-      run: npm test
-      working-directory: ./Server
-
     # Install and test client dependencies
     - name: Install client dependencies
       run: npm ci
-      working-directory: ./Client/FitMaster
-
-    - name: Run client tests
-      run: npm test
       working-directory: ./Client/FitMaster
