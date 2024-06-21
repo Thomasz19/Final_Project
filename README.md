@@ -66,7 +66,7 @@ This diagram illustrates the interactions between the user interface, control lo
 This section contains the sequence diagram of a user loggin a workout. The will start by creating the workout, choosing a muscle group, addign the exercise, and then it will go back through and display it to the user. Figure 4 displays the diagram.
 
 <p align="center">
-  <img src="Images/UML sequence1.png" width="500" title="class diagram">
+  <img src="Images/sequence1.png" width="500" title="sequence diagram">
   <br>
   <br>
   Figure 4: Sequence Diagram
