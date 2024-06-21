@@ -63,7 +63,7 @@ This diagram illustrates the interactions between the user interface, control lo
 
 ### 3.3 Sequence Diagram
 
-This section contains two sequence diagrams. The first one is for a user inputting their information such as age, weight and other basics. The second one is for a user logging a workout they are completing.
+This section contains two sequence diagrams. The first one is for a user inputting their information such as age, weight and other basics. The second one is for a user logging a workout they are completing. Logging basic information for the user's physical body is important to track progress. Making sure workouts are logged is what users will use most in FitMaster.
 
 ## 4 User Guide/implementation
 
