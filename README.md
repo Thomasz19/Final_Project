@@ -63,7 +63,7 @@ This diagram illustrates the interactions between the user interface, control lo
 
 ### 3.3 Sequence Diagram
 
-This section contains the sequence diagram of a user loggin a workout. The will start by creating the workout, choosing a muscle group, addign the exercise, and then it will go back through and display it to the user. Figure 4 displays the diagram.
+This section contains the sequence diagram of a user logging a workout. They will start by creating the workout, choosing a muscle group, adding the exercise, and then it will go return through and display it to the user.
 
 <p align="center">
   <img src="Images/sequence1.png" width="500" title="sequence diagram">
