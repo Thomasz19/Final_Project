@@ -19,6 +19,17 @@ In today's health-conscious society, individuals are increasingly seeking effect
 
 Fitness and health management have become a significant focus for many individuals in today's fast-paced world. With the growing adoption of smartphones, fitness applications have emerged as a convenient and effective tool for tracking workouts and setting personal fitness goals. FitMaster leverages this technological trend to provide users with a comprehensive fitness tracking and goal-setting solution. FitMaster is designed to cater to the needs of fitness enthusiasts by offering personalized workout plans, detailed exercise logging, and progress tracking, all within a user-friendly mobile application. The widespread use of smartphones and advancements in mobile app technology have created an ideal platform for developing a powerful fitness application like FitMaster. This app enables users to select different muscle groups and receive tailored workout suggestions. It also allows them to track the weights used for each exercise, set and monitor fitness goals, and log their daily nutritional intake. With the ability to visually track progress through graphs and summaries, FitMaster provides a holistic approach to fitness management. To get started with FitMaster, users need a smartphone with the app installed. After registering and setting up their profile, users can create and manage workout plans, log exercises, track their weight and other metrics, and set personalized fitness goals. FitMaster aims to simplify the process of achieving fitness objectives by offering an efficient, accessible, and cost-effective solution for health and fitness management. Whether you are a beginner or an experienced fitness enthusiast, FitMaster is designed to help you stay motivated and on track towards your fitness goals.
 
+### 2.1 Jira
+
+We used Jira to manage tasks and track progress throughout the project. Jira helped us break down the project into manageable tasks, assign them to team members, and set deadlines. It allowed us to prioritize work, track issues, and address problems promptly. Overall, Jira kept our team organized and on track, ensuring we met our project goals and timelines.
+
+<p align="center">
+  <img src="Images/Jira.png" width="500" title="class diagram">
+  <br>
+  <br>
+  Figure 1: Jira
+</p>
+
 ## 3 Architectural Design
 
 “FitMaster” application is based on the client-server architecture. The client is provided with an interactive React Native-based user interface for managing and tracking workouts, exercises, and personal fitness progress. The server-side processing is enabled using Node.js, Express, and MongoDB. The client requests the server for user-specific workout and exercise data, and the server responds with the relevant information. Additionally, the server allows users to log their exercise data, track their progress over time, and manage their personal profiles. FitMaster aims to provide a comprehensive solution for users to enhance their fitness journey by offering personalized workout plans and progress tracking.
@@ -40,7 +51,7 @@ This diagram illustrates the interactions between the user interface, control lo
   <img src="Images/UML class.png" width="500" title="class diagram">
   <br>
   <br>
-  Figure 2: Class Diagram
+  Figure 3: Class Diagram
 </p>
 
 ### 3.3 Sequence Diagram
@@ -158,14 +169,22 @@ The server side processing for the fitness application is powered by Node.js and
 
 When a user logs an exercise, the server receives the details, including the workout, exercise, weight, and reps, and stores this data in the database. The server can also group and fetch logs by day for a user, allowing for detailed tracking of workout progress. The administrator has tools to view and manage user details and log entries directly via the server interface, ensuring efficient data management and user support.
 
-## 5 Future Scope
+## 5 Risk Analysis and Retrospective
+
+At the start of the project, we were quite ambitious with our goals given the limited time we had. One major risk was the challenge of implementing all desired features within the deadline. A recurring problem was getting the information from the edit screen to save correctly to the currently selected user. We also faced difficulties in associating workouts with each user. To overcome these issues, we relied heavily on searching for similar problems on Google and using ChatGPT for assistance. This approach helped us troubleshoot effectively and keep the project moving forward.
+
+Despite the challenges, we accomplished several key tasks. We successfully created, deleted, and edited users, and implemented a workflow where users could select a workout, choose exercises related to that workout, and log their exercises. These logs were saved to the currently selected user, ensuring that each user had their own unique logs. We also added functionality to view and organize these logs by the day they were created, making it easier for users to track their progress.
+
+One area we could have improved is the user interface (UI). The UI ended up being somewhat disorganized, which is ironic because we spent the most time on setting it up for each screen. With more time and focus on design, we could have created a more cohesive and user-friendly interface.
+
+## 6 Future Scope
 There are several enhancements we would like to add to future versions of the fitness application to further improve user experience and functionality. One of the key features we aim to include is the ability to edit exercise logs. This will allow users to correct any mistakes or update information, ensuring the accuracy of their workout records. Additionally, users will have the option to delete logs, giving them better control over their exercise history and enabling more efficient management and organization.
 
 Another enhancement we plan to introduce is the ability to favorite workouts. Users will be able to mark their preferred workouts as favorites and access them quickly through a dedicated section, enhancing convenience and personalization of their fitness routines. Furthermore, we would like to integrate a help section into each exercise, providing instructional videos that demonstrate the correct form and technique. This feature aims to ensure users perform exercises safely and effectively, reducing the risk of injury and maximizing the benefits of their workouts.
 
-## 6 Conclusion
+## 7 Conclusion
 
 Overall, our fitness app provides the essential tools for anyone wanting to get in shape and track their progress. By letting users log their workouts, exercises, and personal fitness goals, we aim to make staying fit easier and more fun. We hope to keep improving this project with new features and better user experiences, making it even more useful for everyone on their fitness journey. We believe this app can become a great companion for anyone looking to improve their fitness.
 
-## 7 Walkthrough
+## 8 Walkthrough
 stuff
