@@ -62,7 +62,8 @@ This diagram illustrates the interactions between the user interface, control lo
 </p>
 
 ### 3.3 Sequence Diagram
-Nick
+
+This section contains two sequence diagrams. The first one is for a user inputting their information such as age, weight and other basics. The second one is for a user logging a workout they are completing.
 
 ## 4 User Guide/implementation
 
