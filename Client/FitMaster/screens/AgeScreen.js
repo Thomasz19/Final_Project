@@ -1,14 +1,14 @@
 /**
- * AgeScreen.js
- *
+ * @fileoverview AgeScreen component
+ * 
  * This screen component allows the user to select their age using a slider.
  * The selected age is stored in the UserContext and can be used in subsequent screens.
- *
+ * 
  * The screen includes a back button to navigate to the previous screen and a continue
  * button to proceed to the next screen (WeightScreen).
- *
- * Author: [Thomas Zoldowski]
- * Date: [6/9/2024]
+ * 
+ * @author Thomas Zoldowski
+ * @date 6/9/2024
  */
 
 import React, { useState, useContext } from 'react';
@@ -16,11 +16,19 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert, Image } from 'react-na
 import Slider from '@react-native-community/slider';
 import { UserContext } from '../UserContext.js';
 
+/**
+ * AgeScreen component
+ * @param {object} props - Component props
+ * @param {object} props.navigation - Navigation object for navigating between screens
+ * @return {JSX.Element}
+ */
 const AgeScreen = ({ navigation }) => {
   const { updateUserInfo } = useContext(UserContext);
   const [selectedAge, setSelectedAge] = useState(20); // Default age set to 20
 
-  // Handle the continue button press
+  /**
+   * Handle the continue button press
+   */
   const handleContinue = () => {
     if (!selectedAge) {
       Alert.alert('Error', 'Please select an age.');
@@ -30,7 +38,12 @@ const AgeScreen = ({ navigation }) => {
     navigation.navigate('Weight'); // Navigate to the WeightScreen
   };
 
-  // Back button component
+  /**
+   * Back button component
+   * @param {object} props - Component props
+   * @param {object} props.navigation - Navigation object for navigating between screens
+   * @return {JSX.Element}
+   */
   const BackButton = ({ navigation }) => (
     <TouchableOpacity style={styles.Backcontainer} onPress={() => navigation.goBack()}>
       <Image source={require('../assets/Arrow.png')} style={styles.BackArrow} />
