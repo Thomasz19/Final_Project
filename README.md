@@ -35,7 +35,14 @@ We used Jira to manage tasks and track progress throughout the project. Jira hel
 “FitMaster” application is based on the client-server architecture. The client is provided with an interactive React Native-based user interface for managing and tracking workouts, exercises, and personal fitness progress. The server-side processing is enabled using Node.js, Express, and MongoDB. The client requests the server for user-specific workout and exercise data, and the server responds with the relevant information. Additionally, the server allows users to log their exercise data, track their progress over time, and manage their personal profiles. FitMaster aims to provide a comprehensive solution for users to enhance their fitness journey by offering personalized workout plans and progress tracking.
 
 ### 3.2 Use Case Diagram
-Nick
+
+In a use case diagram for a fitness app that logs workouts, the primary actor is the User who interacts with functionalities like logging workouts, viewing workout history, setting goals, tracking progress, and receiving reminders and notifications. The User initiates actions such as entering workout details, setting fitness goals, and monitoring progress through the app. Administrators, if present, manage user accounts and overall app functionality. This diagram outlines the essential interactions and functionalities between users and the fitness app system.
+
+<p align="center">
+  <img src="Images/use_case.png" width="500" title="use case diagram">
+  <br>
+  <br>
+  Figure 2: Use Case Diagram
 
 ### 3.2 Class Diagram
 
@@ -55,7 +62,7 @@ This diagram illustrates the interactions between the user interface, control lo
 </p>
 
 ### 3.3 Sequence Diagram
-andrew
+Nick
 
 ## 4 User Guide/implementation
 
